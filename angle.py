@@ -17,8 +17,8 @@ from ase.io.vasp import write_vasp
 ## Reads in the POSCAR and pulls out required info
 #---------------------------------------------------------
 ## Read in POSCAR
-atoms = read("CONTCAR-Original.vasp")
-atoms2 = read("CONTCAR-Original.vasp")
+atoms = read("CONTCAR")
+atoms2 = read("CONTCAR")
 
 ## pull out atoms and cell 
 pos = atoms.get_positions()
@@ -266,36 +266,36 @@ for d in Delta_b:
     #------------------------------------------------------
     ## Check-point for moving along the b axix (zig-zag)
     #------------------------------------------------------
-    pos3 = atoms2.get_positions()
-    print(pos3)
-    x_u = [pos3[Ind_u[1]][1], pos3[Ind_u[2]][1], pos3[Ind_u[0]][1], pos3[Ind_u[3]][1]]
-    y_u = [pos3[Ind_u[1]][2], pos3[Ind_u[2]][2], pos3[Ind_u[0]][2], pos3[Ind_u[3]][2]]
-    df = {"x": x_u, "y": y_u}
-    df = pd.DataFrame(df)
-    df = df.sort_values("x")
-    x_l = [pos3[Ind_l[3]][1], pos3[Ind_l[0]][1], pos3[Ind_l[2]][1], pos3[Ind_l[1]][1]]
-    y_l = [pos3[Ind_l[3]][2], pos3[Ind_l[0]][2], pos3[Ind_l[2]][2], pos3[Ind_l[1]][2]]
-    df2 = {"x": x_l, "y": y_l}
-    df2 = pd.DataFrame(df2)
-    df2 = df2.sort_values("x")
+    # pos3 = atoms2.get_positions()
+    # print(pos3)
+    # x_u = [pos3[Ind_u[1]][1], pos3[Ind_u[2]][1], pos3[Ind_u[0]][1], pos3[Ind_u[3]][1]]
+    # y_u = [pos3[Ind_u[1]][2], pos3[Ind_u[2]][2], pos3[Ind_u[0]][2], pos3[Ind_u[3]][2]]
+    # df = {"x": x_u, "y": y_u}
+    # df = pd.DataFrame(df)
+    # df = df.sort_values("x")
+    # x_l = [pos3[Ind_l[3]][1], pos3[Ind_l[0]][1], pos3[Ind_l[2]][1], pos3[Ind_l[1]][1]]
+    # y_l = [pos3[Ind_l[3]][2], pos3[Ind_l[0]][2], pos3[Ind_l[2]][2], pos3[Ind_l[1]][2]]
+    # df2 = {"x": x_l, "y": y_l}
+    # df2 = pd.DataFrame(df2)
+    # df2 = df2.sort_values("x")
     # ##
     # # x_u = [pos2[Ind_u[1]][1], pos2[Ind_u[2]][1], pos2[Ind_u[0]][1], pos2[Ind_u[3]][1]]
     # # y_u = [pos2[Ind_u[1]][2], pos2[Ind_u[2]][2], pos2[Ind_u[0]][2], pos2[Ind_u[3]][2]]
     # # x_l = [pos2[Ind_l[3]][1], pos2[Ind_l[0]][1], pos2[Ind_l[2]][1], pos2[Ind_l[1]][1]]
     # # y_l = [pos2[Ind_l[3]][2], pos2[Ind_l[0]][2], pos2[Ind_l[2]][2], pos2[Ind_l[1]][2]]
     # ## Check-point for moving along the b axix (zig-zag)
-    plt.figure(1)
-    fig, ax1 = plt.subplots()
-        ##
-    pl1 = ax1.plot("x", "y", data = df, linestyle = "--", marker = "o",label = "B', Original", color = "#0000FF") ## blue
-    pl1 = ax1.plot("x", "y", data = df2, linestyle = "--", marker = "o", color = "#FF007F") ## pink  
-    ax1.set_xlim(0, B)
-    ax1.set_ylim(0, C)
-    ax1.set_ylabel(r"C coordinate")
-    ax1.set_xlabel(r"B coordinate")
-    plt.savefig("Figs/"+str(c)+"-Theta_"+str(theta[Delta_b.index(d)])+".png", bbox_inches='tight')
-        ##
-    plt.show()
-    c = c+1
+#    plt.figure(1)
+#    fig, ax1 = plt.subplots()
+#        ##
+#    pl1 = ax1.plot("x", "y", data = df, linestyle = "--", marker = "o",label = "B', Original", color = "#0000FF") ## blue
+#    pl1 = ax1.plot("x", "y", data = df2, linestyle = "--", marker = "o", color = "#FF007F") ## pink  
+#    ax1.set_xlim(0, B)
+#    ax1.set_ylim(0, C)
+#    ax1.set_ylabel(r"C coordinate")
+#    ax1.set_xlabel(r"B coordinate")
+#    plt.savefig("Figs/"+str(c)+"-Theta_"+str(theta[Delta_b.index(d)])+".png", bbox_inches='tight')
+#        ##
+#    plt.show()
+#    c = c+1
 
 print("There should be ", len(theta), " POSCARs in the POSCARs/ directory")
