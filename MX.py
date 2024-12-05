@@ -9,29 +9,43 @@ class MX:
             M: str, 
             X: str,
             cell: NDArray= [4.1534,4.1534,10.9821],
-            h = 0.25):
+            h = 0.25,
+            dh = 0): #For GeSe dh = 0.02279
         self.M = M
         self.X = X
         self.cell = cell
         #self.ab_ratio = ab_ratio
-        self.h = h
-        self._atoms = self.default_atoms()
+        self._h = h
+        self._dh = dh
+        self._atoms = self.update_atoms()
     
-    def default_atoms(self):
+    @property
+    def h(self):
+        return self._h
+    
+    @property
+    def dh(self):
+        return self._dh
+    
+    # @property
+    # def atoms(self):
+    #     return self._atoms
+    
+    def update_atoms(self):
         atoms = Atoms(
             f'{self.M}2{self.X}2',
-            scaled_positions=self.default_scaled_positions(),
+            scaled_positions=self.update_scaled_positions(),
             cell = self.cell,
             pbc =True
         )
         return atoms
         
-    def default_scaled_positions(self):
+    def update_scaled_positions(self):
         scaled_pos = [
             [0.25, 0, 0.25 - self.h / 2], # M
             [0.75, 0.5, 0.25 + self.h / 2], # M
-            [0.25, 0, 0.25 + self.h / 2], # X
-            [0.75, 0.5, 0.25 - self.h / 2], # X
+            [0.25, 0, 0.25 + self.h / 2 - self.dh], # X
+            [0.75, 0.5, 0.25 - self.h / 2 + self.dh], # X
         ]
         return np.array(scaled_pos)
     
